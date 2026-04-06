@@ -41,3 +41,4 @@ Designed and implemented a complete Medallion Architecture (Bronze → Silver �
 
 
 
+### It’s a practical, end-to-end simulation of a real Data Engineering workflow – from ingestion to transformation to serving.
