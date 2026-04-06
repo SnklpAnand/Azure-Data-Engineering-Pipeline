@@ -1,0 +1,12 @@
+{
+    "name": "AzureDataLakeStorage1",
+    "type": "Microsoft.DataFactory/factories/linkedservices",
+    "properties": {
+        "annotations": [],
+        "type": "AzureBlobFS",
+        "typeProperties": {
+            "url": "https://sa1storage.dfs.core.windows.net/",
+            "encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTE*******50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGV******EFGQUNUT1JZQEEwMzc5RUIwLUZCMDUtNDhEQS05OTNBLTg5QzY5Q******LTRmN2QtOTI4My00ZmE5NDBlZTk3MmYiDQp9"
+        }
+    }
+}
