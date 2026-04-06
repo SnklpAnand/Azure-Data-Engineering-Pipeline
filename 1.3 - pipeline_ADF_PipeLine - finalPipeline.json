@@ -1,0 +1,192 @@
+{
+    "name": "ADF_PipeLine",
+    "properties": {
+        "activities": [
+            {
+                "name": "SILVER",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/sankalpec1031@codebasics.in/Azure Project/SILVER"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureDatabricks1",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "DimCust_PL",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "SILVER",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/sankalpec1031@codebasics.in/Gold_Dim_Cust",
+                    "baseParameters": {
+                        "inc_flg": "1"
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureDatabricks2",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "DimProd_PL",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "SILVER",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/sankalpec1031@codebasics.in/Gold_Dim_Prod",
+                    "baseParameters": {
+                        "inc_flg": "1"
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureDatabricks3",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "DimDate_PL",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "SILVER",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/sankalpec1031@codebasics.in/Gold_Dim_Date"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureDatabricks4",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "DimRegion_PL",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "SILVER",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/sankalpec1031@codebasics.in/Gold_Dim_SR",
+                    "baseParameters": {
+                        "inc_flg": "1"
+                    }
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureDatabricks5",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "FactSales_PL",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "DimCust_PL",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "DimProd_PL",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "DimDate_PL",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    },
+                    {
+                        "activity": "DimRegion_PL",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Users/sankalpec1031@codebasics.in/Fact_Sales"
+                },
+                "linkedServiceName": {
+                    "referenceName": "AzureDatabricks6",
+                    "type": "LinkedServiceReference"
+                }
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2026-04-04T13:54:49Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}
