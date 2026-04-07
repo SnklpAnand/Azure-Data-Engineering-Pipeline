@@ -33,7 +33,8 @@ Designed and implemented a complete Medallion Architecture (Bronze â†’ Silver â†
 
 
 ## Full Cycle Pipeline run
-<img width="1913" height="892" alt="10 1 - Full Cycle PipeLine run (in Databricks)" src="https://github.com/user-attachments/assets/bc60733c-9891-4511-813f-d3e41f420876" />
+<img width="1916" height="859" alt="Full_Cycle_Pipeline run" src="https://github.com/user-attachments/assets/756621b9-8ba9-464e-80d7-321b1bf07207" />
+
 
 
 ## ADF Pipeline
